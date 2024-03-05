@@ -20,6 +20,11 @@ public class Romain {
 	public String getNom() {
 		return nom;
 	}
+	
+	public int getforce() {
+		return force;
+		
+	}
 
 	public void parler(String texte) {
 		System.out.println(prendreParole() + "« " + texte + "»");
@@ -146,4 +151,6 @@ public class Romain {
 		minus.sEquiper(Equipement.BOUCLIER);
 
 	}
+
+
 }

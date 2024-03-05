@@ -15,11 +15,11 @@ public class Druide {
 		parler("Bonjour, je suis le druide " + nom + " et ma potion peut aller d'une force " + effetPotionMin + " à "
 				+ effetPotionMax + ".");
 	}
-	public int  preparerPotion(Random random) {
+	public int preparerPotion(Random random) {
 		Random random1 = new Random();
 		
 		do {
-			forcePotion = random1.nextInt(effetPotionMax);
+				forcePotion = random1.nextInt(effetPotionMax);
 			
 		} while (!((forcePotion > 4) && (forcePotion<11)));
 		
