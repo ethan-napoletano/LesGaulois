@@ -1,16 +1,17 @@
 package personnages;
 
+
 public class Romain {
 	private String nom;
 	private int force;
-	private Equipement[] equipement = new Equipement[2];
-	private int nbEquipement = 0;
-	
+	private Equipement[] equipements;
+	private int nbEquipement=0;
 	
 	public Romain(String nom, int force) {
 		this.nom = nom;
 		this.force = force;
 		assert force>0;
+		equipements= new Equipement[2];
 	}
 	
 	public String getNom() {
@@ -20,49 +21,51 @@ public class Romain {
 	public void parler(String texte) {
 		System.out.println(prendreParole() + "« " + texte + "»");
 	}
-
+	
 	private String prendreParole() {
 		return "Le romain " + nom + " : ";
 	}
 	
 	public void recevoirCoup(int forceCoup) {
-		int forceD = force;
+		assert force>0;
+		int force1=force;
 		force -= forceCoup;
 		if (force > 0) {
 			parler("Aïe");
-		} else {
-			parler("j'abandonne...");
 		}
-		assert forceD>force;
+		else {
+			parler("J'abandonne...");
+		}
+		assert force1>force;
 	}
 	
-	
-	public void sEquiper(Equipement equipement) {
-		
-		
+	public void  sEquiper (Equipement equipement) {
 		switch (nbEquipement) {
-		
-		case 2:
-			System.out.println("Le soldat" + nom +"est déjà bien protégé !");
+		case 0: {
+			System.out.println("Le soldat "+nom+" s'equipe avec un "+ equipement+".");
+			equipements[nbEquipement]=equipement;
+			nbEquipement++;
+			break;
 			
-		case 1:
-			if (this.equipement[0] == equipement) {
-				System.out.println("Le soldat" + nom +"a deja "+ equipement +" !");
+		}
+		case 1: {
+			if (equipements[nbEquipement-1]==equipement) {
+				System.out.println("Le soldat "+nom+" possede déja un "+ equipement+".");
 			}
 			else {
-				this.equipement[1]=equipement;
+				equipements[nbEquipement]=equipement;
+				System.out.println("Le soldat "+nom+" s'equipe d'un "+ equipement+".");
+				System.out.println("Le soldat "+ nom +" est déjà bien protégé!");
+				nbEquipement++;
+				break;
 			}
-			
-		
-		default:
-			this.equipement[0]=equipement;
 		}
-		
+		default:
+			break;
+		}
 		
 	}
 	
-	
-
 	public static void main(String[] args) {
 		Romain minus =new Romain("Minus",6);
 		minus.parler("Bonjour");
@@ -70,5 +73,9 @@ public class Romain {
 		minus.recevoirCoup(8);	
 		System.out.println(Equipement.BOUCLIER);
 		System.out.println(Equipement.CASQUE);
-	}	
-}
+		minus.sEquiper(Equipement.CASQUE);
+		minus.sEquiper(Equipement.CASQUE);
+		minus.sEquiper(Equipement.BOUCLIER);
+		
+	}
+} 
