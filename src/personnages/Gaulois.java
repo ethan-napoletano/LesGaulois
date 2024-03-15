@@ -1,9 +1,11 @@
 package personnages;
 
+import java.util.Random;
+
 public class Gaulois {
-	private String nom;
-	private int force;
-	private int effetPotion = 1;
+	public String nom;
+	public int force;
+	public int effetpotion = 1;
 
 	public Gaulois(String nom, int force) {
 		this.nom = nom;
@@ -15,7 +17,7 @@ public class Gaulois {
 	}
 
 	public void parler(String texte) {
-		System.out.println(prendreParole() + "« " + texte + "»");
+		System.out.println(prendreParole() + "Â« " + texte + "Â»");
 	}
 
 	private String prendreParole() {
@@ -23,29 +25,32 @@ public class Gaulois {
 	}
 
 	public void frapper(Romain romain) {
-		System.out.println(nom + " envoie un grand coup dans la mâchoire de "
-				+ romain.getNom());
-		romain.recevoirCoup(force/3);
+		System.out.println(nom + " envoie un grand coup dans la mÃ¢choire de " + romain.getNom());
+		romain.recevoirCoup((force / 3)*effetpotion);
 	}
-	
-	@Override
+		
+	public void boirePotion(int forcePotion) {
+		
+		effetpotion = forcePotion;
+		parler("Merci Druide, je sens que ma force est "+forcePotion+" fois dÃ©cuplÃ©e");
+	}
+
 	public String toString() {
-	return "Gaulois [nom=" + nom + ", force=" + force + ", effetPotion="
-	+ effetPotion + "]";
+		return "Gaulois [nom=" + nom + ", force=" + force + ", effetPotion=" + effetpotion + "]";
+//		System.out.println(asterix);
+
 	}
 
 	public static void main(String[] args) {
-		
-//TODO créer un main permettant de tester la classe Gaulois
-		
-		Gaulois asterix = new Gaulois("Astérix", 8);
+		Romain minus = new Romain("Minus",6);
+		Gaulois asterix = new Gaulois("Asterix", 8);
+		Druide panoramix = new Druide("Panoramix",5,10);
+		Random random1 = new Random();
+		int forcePotion = panoramix.preparerPotion(random1);
+//	System.out.println(asterix.toString()); ca n'affiche pas le nom du gaulois 
 		System.out.println(asterix.getNom());
-		System.out.println(asterix);
-		System.out.println(asterix.prendreParole());
-		asterix.parler("bonjour");
-		
-		
-		
+		asterix.parler("Bonjour !");
+		asterix.frapper(minus);
+		asterix.boirePotion(forcePotion);
 	}
-
 }
